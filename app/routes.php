@@ -11,7 +11,7 @@
 |
 */
 
-Route::resource('tickets', 'TicketsController');
+Route::resource('/', 'TicketsController');
 
 Route::get('test', function(){
    return Tienda::lists('clave', 'id_tienda');
