@@ -3,6 +3,7 @@
 class TicketsController extends \BaseController
 {
 
+    public $layout = 'layouts.common';
     /**
      * Display a listing of the resource.
      *
