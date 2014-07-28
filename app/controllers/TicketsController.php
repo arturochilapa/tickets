@@ -23,7 +23,7 @@ class TicketsController extends \BaseController
     {
         $tiendas_list = Tienda::lists('clave', 'id_tienda');
         $combo = array(0 => "Seleccione ... ") + $tiendas_list;
-        $selected = array();
+        $selected = array(Session::get('id_tienda'));
         return View::make('tickets.create', compact('combo', 'selected'));
     }
 
@@ -35,7 +35,39 @@ class TicketsController extends \BaseController
      */
     public function store()
     {
-        //
+        $rules = array(
+            'tienda' => 'not_in:0',
+            'nombre' => 'required',
+            'paterno' => 'required',
+            'materno' => 'required',
+            'fecha' => 'required|date',
+            'edad' => 'required',
+            'telefono' => 'required',
+            'ticket' => 'required|unique:tickets,no_ticket'
+        );
+        
+        $validator = Validator::make(Input::all(), $rules);
+        if ($validator->fails()) {
+			return Redirect::to('create')
+				->withErrors($validator);
+		}else{
+		  
+            $ticket = new Tickets;
+            $ticket->id_tienda = Input::get('tienda');
+            $ticket->nombre = Input::get('nombre');
+            $ticket->apellido_paterno = Input::get('paterno');
+            $ticket->apellido_materno = Input::get('materno');
+            $ticket->fecha = Input::get('fecha');
+            $ticket->edad = Input::get('edad');
+            $ticket->telefono = Input::get('telefono');
+            $ticket->no_ticket = Input::get('ticket');
+            $ticket->mail = Input::get('mail');
+            $ticket->save();
+            Session::flash('message', 'Ticket Creado Correctamente.');
+            Session::flash('id_tienda', Input::get('tienda'));
+			return Redirect::to('/create');
+    
+		}
     }
 
 

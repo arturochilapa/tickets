@@ -25,6 +25,7 @@ class CreateTicketsTable extends Migration {
 			$table->string('no_ticket', 30);
 			$table->string('mail', 50);
 		});
+       
 	}
 
 	/**
