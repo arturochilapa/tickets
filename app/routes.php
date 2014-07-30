@@ -12,8 +12,5 @@
 */
 
 Route::resource('/', 'TicketsController');
-
-Route::get('test', function(){
-   return Tienda::lists('clave', 'id_tienda');
-   
-});
+Route::resource('winners', 'TicketsController@winners');
+Route::post('search', 'TicketsController@searchTicket');

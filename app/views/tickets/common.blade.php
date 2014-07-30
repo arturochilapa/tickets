@@ -28,13 +28,13 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
-                <li><a href="#">Inicio</a></li>
-                <li class="active"><a href="#">Nuevo Ticket</a></li>
-                <li><a href="#">Ganadores</a></li>
+                <li {{(Request::is('/') ? 'class="active"' : '')}}><a href="/">Inicio</a></li>
+                <li {{(Request::is('create') ? 'class="active"' : '')}}><a href="{{URL::to('create')}}">Nuevo Ticket</a></li>
+                <li {{(Request::is('winners') ? 'class="active"' : '')}}><a href="{{URL::to('winners')}}">Ganadores</a></li>
               </ul>
-              <form class="navbar-form navbar-left" role="search">
+              <form class="navbar-form navbar-left" role="search" method="post" action="search">
                 <div class="form-group">
-                  <input type="text" class="form-control" placeholder="B&uacute;scar">
+                  <input type="text" value="" class="form-control" name="q" placeholder="B&uacute;scar">
                 </div>
                 <button type="submit" class="btn btn-default">B&uacute;scar</button>
               </form>
@@ -42,6 +42,8 @@
           </div><!-- /.container-fluid -->
         </nav>
     </header>
-    @yield('content');
+    <div style="margin: 50px;">
+    @yield('content')
+    </div>
     </body>
 </html>

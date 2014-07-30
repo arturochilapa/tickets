@@ -3,6 +3,7 @@
 class TicketsController extends \BaseController
 {
 
+    //public $layout = 'layouts.common';
     /**
      * Display a listing of the resource.
      *
@@ -10,7 +11,7 @@ class TicketsController extends \BaseController
      */
     public function index()
     {
-        
+        return View::make('tickets.index');
     }
 
 
@@ -43,15 +44,13 @@ class TicketsController extends \BaseController
             'fecha' => 'required|date',
             'edad' => 'required',
             'telefono' => 'required',
-            'ticket' => 'required|unique:tickets,no_ticket'
-        );
-        
+            'ticket' => 'required|unique:tickets,no_ticket');
+
         $validator = Validator::make(Input::all(), $rules);
         if ($validator->fails()) {
-			return Redirect::to('create')
-				->withErrors($validator);
-		}else{
-		  
+            return Redirect::to('create')->withErrors($validator);
+        } else {
+
             $ticket = new Tickets;
             $ticket->id_tienda = Input::get('tienda');
             $ticket->nombre = Input::get('nombre');
@@ -65,9 +64,9 @@ class TicketsController extends \BaseController
             $ticket->save();
             Session::flash('message', 'Ticket Creado Correctamente.');
             Session::flash('id_tienda', Input::get('tienda'));
-			return Redirect::to('/create');
-    
-		}
+            return Redirect::to('/create');
+
+        }
     }
 
 
@@ -116,6 +115,25 @@ class TicketsController extends \BaseController
     public function destroy($id)
     {
         //
+    }
+
+    public function winners()
+    {
+        return View::make('tickets.winners');
+    }
+
+    public function searchTicket()
+    {
+        $q = Input::get('q');
+        $t = Tickets::where("nombre", 'LIKE' , '%'.$q.'%')
+        ->orWhere("apellido_paterno", 'LIKE' , '%'.$q.'%')
+        ->orWhere("apellido_materno", 'LIKE' , '%'.$q.'%')
+        ->orWhere("no_ticket", 'LIKE' , '%'.$q.'%')
+        ->orWhere("telefono", 'LIKE' , '%'.$q.'%')
+        ->get();
+        return View::make('tickets.search', compact('t'));
+        
+
     }
 
 
