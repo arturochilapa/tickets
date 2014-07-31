@@ -34,7 +34,7 @@
               </ul>
               <form class="navbar-form navbar-left" role="search" method="post" action="search">
                 <div class="form-group">
-                  <input type="text" value="" class="form-control" name="q" placeholder="B&uacute;scar">
+                  <input type="text" value="{{$q}}" class="form-control" name="q" placeholder="B&uacute;scar" />
                 </div>
                 <button type="submit" class="btn btn-default">B&uacute;scar</button>
               </form>
