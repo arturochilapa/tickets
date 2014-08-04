@@ -9,7 +9,7 @@
         {{ HTML::ul($errors->all()) }}
 
         {{ Form::open(array(
-        'url' => '/',
+        'url' => 'sistema',
         'method' => 'POST'
         )) }}
         

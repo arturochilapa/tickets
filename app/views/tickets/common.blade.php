@@ -33,11 +33,11 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
-                <li {{(Request::is('/') ? 'class="active"' : '')}}><a href="/">Inicio</a></li>
-                <li {{(Request::is('create') ? 'class="active"' : '')}}><a href="{{URL::to('create')}}">Nuevo Ticket</a></li>
-                <li {{(Request::is('winners') ? 'class="active"' : '')}}><a href="{{URL::to('winners')}}">Ganadores</a></li>
+                <li {{(Request::is('/') ? 'class="active"' : '')}}><a href="/sistema">Inicio</a></li>
+                <li {{(Request::is('create') ? 'class="active"' : '')}}><a href="{{URL::to('/sistema/create')}}">Nuevo Ticket</a></li>
+                <li {{(Request::is('winners') ? 'class="active"' : '')}}><a href="{{URL::to('sistema/winners')}}">Ganadores</a></li>
               </ul>
-              <form class="navbar-form navbar-left" role="search" method="post" action="/search">
+              <form class="navbar-form navbar-left" role="search" method="post" action="/sistema/search">
                 <div class="form-group">
                   <input type="text" value="{{$q}}" class="form-control" name="q" placeholder="B&uacute;scar" />
                 </div>

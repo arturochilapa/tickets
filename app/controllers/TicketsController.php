@@ -48,7 +48,7 @@ class TicketsController extends \BaseController
 
         $validator = Validator::make(Input::all(), $rules);
         if ($validator->fails()) {
-            return Redirect::to('create')->withErrors($validator);
+            return Redirect::to('/sistema/create')->withErrors($validator);
         } else {
 
             $ticket = new Tickets;
@@ -64,7 +64,7 @@ class TicketsController extends \BaseController
             $ticket->save();
             Session::flash('message', 'Ticket Creado Correctamente.');
             Session::flash('id_tienda', Input::get('tienda'));
-            return Redirect::to('/create');
+            return Redirect::to('/sistema/create');
 
         }
     }
@@ -90,9 +90,13 @@ class TicketsController extends \BaseController
      */
     public function edit($id)
     {
-        $ticket = Tickets::where('id_ticket','=', $id)->first();
-        return View::make('tickets.edit')
-			->with('ticket', $ticket);
+        $ticket = Tickets::find($id);
+        
+        $tiendas_list = Tienda::lists('clave', 'id_tienda');
+        $combo = array(0 => "Seleccione ... ") + $tiendas_list;
+        
+        
+        return View::make('tickets.edit', compact('ticket', 'combo'));
     }
 
 
@@ -100,11 +104,39 @@ class TicketsController extends \BaseController
      * Update the specified resource in storage.
      *
      * @param  int  $id
-     * @return Response
+     * @return Responses
      */
     public function update($id)
     {
-        //
+        $rules = array(
+            'tienda' => 'not_in:0',
+            'nombre' => 'required',
+            'apellido_paterno' => 'required',
+            'apellido_materno' => 'required',
+            'fecha' => 'required|date',
+            'edad' => 'required',
+            'telefono' => 'required',
+            'no_ticket' => 'required');
+
+        $validator = Validator::make(Input::all(), $rules);
+        if ($validator->fails()) {
+            return Redirect::to('/sistema/'.$id.'/edit')->withErrors($validator);
+        } else {
+            $ticket = Tickets::find($id);
+            $ticket->id_tienda = Input::get('tienda');
+            $ticket->nombre = Input::get('nombre');
+            $ticket->apellido_paterno = Input::get('apellido_paterno');
+            $ticket->apellido_materno = Input::get('apellido_materno');
+            $ticket->fecha = Input::get('fecha');
+            $ticket->edad = Input::get('edad');
+            $ticket->telefono = Input::get('telefono');
+            $ticket->no_ticket = Input::get('no_ticket');
+            $ticket->mail = Input::get('mail');
+            $ticket->save();
+            
+        }
+        Session::flash('message', 'Ticket Actualizado Correctamente.');
+        return View::make('tickets.index');
     }
 
 

@@ -11,7 +11,7 @@
 |
 */
 
-Route::resource('/', 'TicketsController');
-Route::resource('/{id}/edit', 'TicketsController@edit');
-Route::resource('winners', 'TicketsController@winners');
-Route::post('search', 'TicketsController@searchTicket');
+Route::resource('/sistema', 'TicketsController');
+#Route::resource('/{id}/edit', 'TicketsController@edit');
+Route::resource('sistema/winners', 'TicketsController@winners');
+Route::post('sistema/search', 'TicketsController@searchTicket');
