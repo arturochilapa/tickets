@@ -37,7 +37,7 @@
                 <li {{(Request::is('create') ? 'class="active"' : '')}}><a href="{{URL::to('create')}}">Nuevo Ticket</a></li>
                 <li {{(Request::is('winners') ? 'class="active"' : '')}}><a href="{{URL::to('winners')}}">Ganadores</a></li>
               </ul>
-              <form class="navbar-form navbar-left" role="search" method="post" action="search">
+              <form class="navbar-form navbar-left" role="search" method="post" action="/search">
                 <div class="form-group">
                   <input type="text" value="{{$q}}" class="form-control" name="q" placeholder="B&uacute;scar" />
                 </div>

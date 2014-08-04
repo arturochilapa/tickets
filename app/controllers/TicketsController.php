@@ -91,6 +91,8 @@ class TicketsController extends \BaseController
     public function edit($id)
     {
         $ticket = Tickets::where('id_ticket','=', $id)->first();
+        return View::make('tickets.edit')
+			->with('ticket', $ticket);
     }
 
 
