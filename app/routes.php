@@ -11,6 +11,9 @@
 |
 */
 
+Route::get('/', function (){
+    return Redirect::to('/sistema/');
+});
 Route::resource('/sistema', 'TicketsController');
 #Route::resource('/{id}/edit', 'TicketsController@edit');
 Route::resource('sistema/winners', 'TicketsController@winners');
