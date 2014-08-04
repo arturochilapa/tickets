@@ -1,3 +1,8 @@
+@if(empty($q))
+    {{$q = ''}}
+@else
+
+@endif
 <!DOCTYPE html>
 <html>
 <head>

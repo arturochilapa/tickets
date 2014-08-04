@@ -18,7 +18,7 @@
         <td>{{$value['no_ticket']}}</td>
         <td>{{$value['fecha']}}</td>
         <td>{{$value['nombre']." ".$value['apellido_paterno']." ".$value['apellido_materno']}}</td>
-        <td><a href="{{URL::to('edit/')}}" class="btn btn-info btn-lg active btn-sm" role="button">Editar</a></td>
+        <td><a href="{{URL::to($value->id_ticket. '/edit')}}" class="btn btn-info btn-lg active btn-sm" role="button">Editar</a></td>
     </tr>
 @endforeach
 </table>
