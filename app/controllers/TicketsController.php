@@ -11,7 +11,13 @@ class TicketsController extends \BaseController
      */
     public function index()
     {
-        return View::make('tickets.index');
+        $tiendas  = DB::table('tickets')
+            ->join('tiendas', 'tiendas.id_tienda', '=', 'tickets.id_tienda')
+            ->select('tiendas.clave', 'tiendas.nombre_tienda', DB::raw('count(*) AS total'))
+            ->groupBy('tickets.id_tienda')
+            ->get();
+        ;
+        return View::make('tickets.index', compact('tiendas'));
     }
 
 
