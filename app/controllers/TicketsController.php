@@ -13,10 +13,11 @@ class TicketsController extends \BaseController
     {
         $tiendas  = DB::table('tickets')
             ->join('tiendas', 'tiendas.id_tienda', '=', 'tickets.id_tienda')
-            ->select('tiendas.clave', 'tiendas.nombre_tienda', DB::raw('count(*) AS total'))
+            ->select('tiendas.clave', 'tiendas.nombre_tienda', DB::raw('count(*) AS total'), 'tiendas.id_tienda')
             ->groupBy('tickets.id_tienda')
+            ->take(10)
             ->get();
-        ;
+        
         return View::make('tickets.index', compact('tiendas'));
     }
 
@@ -84,7 +85,16 @@ class TicketsController extends \BaseController
      */
     public function show($id)
     {
-        //
+        $tienda = Tienda::find($id);
+        $tickets  = DB::table('tickets')
+            ->select(DB::raw('CONCAT(nombre, " ", apellido_paterno, " ", apellido_materno) AS nombre, COUNT(*) AS total'))
+            ->where('id_tienda', '=', $tienda->id_tienda)
+            ->groupBy('nombre', 'apellido_paterno', 'apellido_materno')
+            ->orderBy('total', 'DESC')
+            ->take(10)
+            ->get();
+        
+        return View::make('tickets.show', compact('tienda', 'tickets'));
     }
 
 

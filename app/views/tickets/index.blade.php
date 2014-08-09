@@ -10,7 +10,7 @@
           <div class="panel-body">
            <div class="list-group">
           @foreach ($tiendas AS $total)
-                <a href="#" class="list-group-item">
+                <a href="{{URL::to('/sistema/'.$total->id_tienda)}}" class="list-group-item">
                   <span class="badge pull-right">{{$total->total}}</span>
                   {{$total->clave}} {{$total->nombre_tienda}}
                 </a>
