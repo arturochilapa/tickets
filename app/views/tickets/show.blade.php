@@ -5,7 +5,8 @@
       <!-- Default panel contents -->
         <div class="panel-heading"><span class="glyphicon glyphicon-shopping-cart"></span> {{$tienda->clave}}</div>
         <div class="panel-body">
-            <p>{{$tienda->nombre_tienda.' - '.$tienda->estado_tienda.' '.$tienda->municipio_tienda}} <span class="glyphicon glyphicon-map-marker"></span> </p>
+            <p>{{$tienda->nombre_tienda.' - '.$tienda->estado_tienda.' '.$tienda->municipio_tienda}} <a class="various fancybox.iframe" href="https://www.google.com/maps/embed/v1/view?key={{$key['maps']}}&center={{$tienda->latitud.','$tienda->longitud}}&zoom=18">
+<span class="glyphicon glyphicon-map-marker"></span></a> </p>
         </div>
 
       <!-- Table -->
@@ -24,4 +25,19 @@
     @endforeach
         </table>
     </div>
+    <script>
+    $(document).ready(function() {
+	$(".various").fancybox({
+		maxWidth	: 800,
+		maxHeight	: 600,
+		fitToView	: false,
+		width		: '70%',
+		height		: '70%',
+		autoSize	: false,
+		closeClick	: false,
+		openEffect	: 'none',
+		closeEffect	: 'none'
+	});
+});
+    </script>
 @stop

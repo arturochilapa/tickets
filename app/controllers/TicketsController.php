@@ -86,6 +86,7 @@ class TicketsController extends \BaseController
     public function show($id)
     {
         $tienda = Tienda::find($id);
+        $key = array('maps' => 'AIzaSyCI_HJC8FW7cZikRAgqb6W5rYcVZkRcQ5I');
         $tickets  = DB::table('tickets')
             ->select(DB::raw('CONCAT(nombre, " ", apellido_paterno, " ", apellido_materno) AS nombre, COUNT(*) AS total'))
             ->where('id_tienda', '=', $tienda->id_tienda)
@@ -94,7 +95,7 @@ class TicketsController extends \BaseController
             ->take(10)
             ->get();
         
-        return View::make('tickets.show', compact('tienda', 'tickets'));
+        return View::make('tickets.show', compact('tienda', 'tickets', 'key'));
     }
 
 
