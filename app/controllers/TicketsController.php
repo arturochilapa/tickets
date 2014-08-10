@@ -75,15 +75,26 @@ class TicketsController extends \BaseController
 
         }
     }
-
-
+    
     /**
-     * Display the specified resource.
+     * Display the specified store.
      *
      * @param  int  $id
      * @return Response
      */
     public function show($id)
+    {
+        //
+    }
+
+
+    /**
+     * Display the specified store.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function tienda($id)
     {
         $tienda = Tienda::find($id);
         $key = array('maps' => 'AIzaSyCI_HJC8FW7cZikRAgqb6W5rYcVZkRcQ5I');
@@ -150,10 +161,16 @@ class TicketsController extends \BaseController
             $ticket->no_ticket = Input::get('no_ticket');
             $ticket->mail = Input::get('mail');
             $ticket->save();
+            $tiendas  = DB::table('tickets')
+            ->join('tiendas', 'tiendas.id_tienda', '=', 'tickets.id_tienda')
+            ->select('tiendas.clave', 'tiendas.nombre_tienda', DB::raw('count(*) AS total'), 'tiendas.id_tienda')
+            ->groupBy('tickets.id_tienda')
+            ->take(10)
+            ->get();
             
         }
         Session::flash('message', 'Ticket Actualizado Correctamente.');
-        return View::make('tickets.index');
+        return View::make('tickets.index', compact('tiendas'));
     }
 
 
