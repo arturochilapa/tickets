@@ -49,7 +49,7 @@
               <ul class="nav navbar-nav">
                 <li {{(Request::is('/') ? 'class="active"' : '')}}><a href="/sistema">Inicio</a></li>
                 <li {{(Request::is('create') ? 'class="active"' : '')}}><a href="{{URL::to('/sistema/create')}}">Nuevo Ticket</a></li>
-                <li {{(Request::is('winners') ? 'class="active"' : '')}}><a href="{{URL::to('sistema/winners')}}">Ganadores</a></li>
+                
               </ul>
               <form class="navbar-form navbar-left" role="search" method="post" action="/sistema/search">
                 <div class="form-group">
