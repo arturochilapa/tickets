@@ -182,7 +182,10 @@ class TicketsController extends \BaseController
      */
     public function destroy($id)
     {
-        //
+        $ticket = Tickets::find($id);
+        $ticket->delete();
+        Session::flash('message', 'Ticket borrado Satisfactoriamente');
+		return Redirect::to('sistema');
     }
 
     public function winners()

@@ -19,7 +19,12 @@
         <td>{{$value['no_ticket']}}</td>
         <td>{{$value['fecha']}}</td>
         <td>{{$value['nombre']." ".$value['apellido_paterno']." ".$value['apellido_materno']}}</td>
-        <td><a href="{{URL::to('/sistema/'.$value->id_ticket. '/edit')}}" class="btn btn-info btn-lg active btn-sm" role="button">Editar</a></td>
+        <td><a href="{{URL::to('/sistema/'.$value->id_ticket. '/edit')}}" class="btn btn-info btn-lg active btn-sm" role="button">Editar</a>
+        {{ Form::open(array('url' => 'sistema/' . $value->id_ticket, 'class' => 'pull-right')) }}
+			{{ Form::hidden('_method', 'DELETE') }}
+			{{ Form::submit('Eliminar', array('class' => 'btn btn-warning')) }}
+		{{ Form::close() }}
+        </td>
     </tr>
 @endforeach
 </table>
