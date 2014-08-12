@@ -14,7 +14,7 @@ class UnasignedKey extends Migration {
 	{
 		Schema::table('tickets', function($table)
         {
-             $table->unsigned('id_tienda'); 
+             
         });
 	}
 
