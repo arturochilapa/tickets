@@ -36,6 +36,10 @@
         		{{ Form::text('fecha', Input::old('fecha'), array('class' => 'form-control')) }}
         	</div>
             <div class="form-group">
+        		{{ Form::label('hora', 'Hora') }}
+        		{{ Form::input('time', 'hora', Input::old('hora'), array('class' => 'form-control')) }}
+        	</div>
+            <div class="form-group">
         		{{ Form::label('edad', 'Edad') }}
         		{{ Form::text('edad', Input::old('edad'), array('class' => 'form-control')) }}
         	</div>
@@ -57,6 +61,7 @@
         
         {{ Form::close() }}
     <script>
+        $('#hora').timepicker();
         $(function() {
         $( "#fecha" ).datepicker({ dateFormat: 'yy-mm-dd' });
       });
