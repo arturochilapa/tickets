@@ -29,7 +29,7 @@ class TicketsController extends \BaseController
      */
     public function create()
     {
-        $tiendas_list = Tienda::lists('clave', 'id_tienda');
+        $tiendas_list = Tienda::orderBy('clave', 'asc')->lists('clave', 'id_tienda');
         $combo = array(0 => "Seleccione ... ") + $tiendas_list;
         $selected = array(Session::get('id_tienda'));
         return View::make('tickets.create', compact('combo', 'selected'));
@@ -57,13 +57,13 @@ class TicketsController extends \BaseController
         if ($validator->fails()) {
             return Redirect::to('/sistema/create')->withErrors($validator);
         } else {
-
+            $fecha = Input::get('fecha') . ' '. Input::get('hora');
             $ticket = new Tickets;
             $ticket->id_tienda = Input::get('tienda');
             $ticket->nombre = Input::get('nombre');
             $ticket->apellido_paterno = Input::get('paterno');
             $ticket->apellido_materno = Input::get('materno');
-            $ticket->fecha = Input::get('fecha');
+            $ticket->fecha = $fecha;
             $ticket->edad = Input::get('edad');
             $ticket->telefono = Input::get('telefono');
             $ticket->no_ticket = Input::get('ticket');
