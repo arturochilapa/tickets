@@ -19,3 +19,4 @@ Route::get('/sistema/tienda/ver/{id}', 'TicketsController@tienda');
 #Route::resource('/{id}/edit', 'TicketsController@edit');
 Route::resource('sistema/winners', 'TicketsController@winners');
 Route::post('sistema/search', 'TicketsController@searchTicket');
+Route::get('/export/{id}', 'TicketsController@excel');

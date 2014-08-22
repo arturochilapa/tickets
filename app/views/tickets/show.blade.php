@@ -3,7 +3,13 @@
 @section ('content')
     <div class="panel panel-default">
       <!-- Default panel contents -->
-        <div class="panel-heading"><span class="glyphicon glyphicon-shopping-cart"></span> {{$tienda->clave}}</div>
+        <div class="panel-heading"><span class="glyphicon glyphicon-shopping-cart"></span> {{$tienda->clave}} 
+        <div class="btn-group pull-right">
+            <a href="/export/">
+            <span class="glyphicon glyphicon-download-alt"></span> Descargar Excel
+            </a>
+        </div>
+        </div>
         <div class="panel-body">
             <p>{{$tienda->nombre_tienda.' - '.$tienda->estado_tienda.' '.$tienda->municipio_tienda}} 
             @if( $tienda->latitid AND $tienda->longitud)

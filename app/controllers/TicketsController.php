@@ -207,6 +207,65 @@ class TicketsController extends \BaseController
         
 
     }
+    
+    public function excel($id){
+        $excel = App::make('excel');
+        
+        /*
+select
+(@cnt := @cnt + 1) AS rowNumber, 
+tiendas.clave,
+	(
+		SELECT count(*) AS t
+		FROM tickets AS temp
+		WHERE 
+			temp.nombre = tickets.nombre
+			AND temp.apellido_paterno = tickets.apellido_paterno
+			AND temp.apellido_materno = tickets.apellido_materno
+	),
+tickets.nombre,
+tickets.apellido_paterno,
+tickets.apellido_materno,
+tickets.fecha,
+tickets.edad,
+tickets.telefono,
+tickets.no_ticket,
+tickets.mail,
+CONCAT(tiendas.clave, ' ', tiendas.nombre_tienda) AS nombre_tienda,
+tiendas.municipio_tienda
+from tickets
+CROSS JOIN (SELECT @cnt := 0) AS row
+Inner join tiendas ON (tickets.id_tienda = tiendas.id_tienda)
+Where tiendas.id_tienda = 98
+        
+        */
+        $foo = '';
+        $data = Tickets::where('tiendas.id_tienda', '=', $id)
+        ->select(DB::raw('(@cnt := @cnt + 1) AS Number'), 'tiendas.clave', DB::raw('(
+		SELECT count(*) AS t
+		FROM tickets AS temp
+		WHERE 
+			temp.nombre = tickets.nombre
+			AND temp.apellido_paterno = tickets.apellido_paterno
+			AND temp.apellido_materno = tickets.apellido_materno
+	)AS ticket_registrados'),'tickets.nombre','tickets.apellido_paterno','tickets.apellido_materno','tickets.fecha','tickets.edad','tickets.telefono','tickets.no_ticket','tickets.mail', DB::raw('CONCAT(tiendas.clave, " ", tiendas.nombre_tienda) AS nombre_tienda'), 'tiendas.municipio_tienda')
+        ->join('tiendas', 'tickets.id_tienda', '=', 'tiendas.id_tienda')
+        
+        
+
+        ->get();
+
+        
+        Excel::create('Filename', function($excel) use($data) {
+        
+            $excel->sheet('Sheetname', function($sheet) use($data) {
+        
+                $sheet->fromModel($data);
+        
+            });
+        
+        })->export('xls');
+    }
 
 
 }
