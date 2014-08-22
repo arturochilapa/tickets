@@ -5,7 +5,7 @@
       <!-- Default panel contents -->
         <div class="panel-heading"><span class="glyphicon glyphicon-shopping-cart"></span> {{$tienda->clave}} 
         <div class="btn-group pull-right">
-            <a href="/export/">
+            <a href="/export/{{$tienda->id_tienda}}">
             <span class="glyphicon glyphicon-download-alt"></span> Descargar Excel
             </a>
         </div>
