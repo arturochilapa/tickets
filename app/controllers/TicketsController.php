@@ -248,7 +248,7 @@ Where tiendas.id_tienda = 98
 			temp.nombre = tickets.nombre
 			AND temp.apellido_paterno = tickets.apellido_paterno
 			AND temp.apellido_materno = tickets.apellido_materno
-	)AS ticket_registrados'),'tickets.nombre','tickets.apellido_paterno','tickets.apellido_materno','tickets.fecha','tickets.edad','tickets.telefono', DB::raw('CONCAT(" ", tickets.no_ticket)') ,'tickets.mail', DB::raw('CONCAT(tiendas.clave, " ", tiendas.nombre_tienda) AS nombre_tienda'), 'tiendas.municipio_tienda')
+	)AS ticket_registrados'),'tickets.nombre','tickets.apellido_paterno','tickets.apellido_materno','tickets.fecha','tickets.edad','tickets.telefono', DB::raw('CONCAT(" ", tickets.no_ticket) AS ticket') ,'tickets.mail', DB::raw('CONCAT(tiendas.clave, " ", tiendas.nombre_tienda) AS nombre_tienda'), 'tiendas.municipio_tienda')
         ->join('tiendas', 'tickets.id_tienda', '=', 'tiendas.id_tienda')
         
         
