@@ -8,6 +8,7 @@
     <tr>
         <th>ID</th>
         <th>No Ticket</th>
+        <th>Tienda</th>
         <th>Fecha</th>
         <th>Nombre Completo</th>
         <th>Acci&oacute;n</th>
@@ -17,6 +18,7 @@
     <tr>
         <td>{{$value['id_ticket']}}</td>
         <td>{{$value['no_ticket']}}</td>
+        <td>{{$value['clave']}}</td>
         <td>{{$value['fecha']}}</td>
         <td>{{$value['nombre']." ".$value['apellido_paterno']." ".$value['apellido_materno']}}</td>
         <td><a href="{{URL::to('/sistema/'.$value->id_ticket. '/edit')}}" class="btn btn-info btn-lg active btn-sm" role="button">Editar</a>

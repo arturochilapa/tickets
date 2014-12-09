@@ -196,11 +196,23 @@ class TicketsController extends \BaseController
     public function searchTicket()
     {
         $q = Input::get('q');
+        /*
         $t = Tickets::where("nombre", 'LIKE' , '%'.$q.'%')
         ->orWhere("apellido_paterno", 'LIKE' , '%'.$q.'%')
         ->orWhere("apellido_materno", 'LIKE' , '%'.$q.'%')
         ->orWhere("no_ticket", 'LIKE' , '%'.$q.'%')
         ->orWhere("telefono", 'LIKE' , '%'.$q.'%')
+        ->get();
+        */
+        $t = Tickets::where('tickets.nombre','like','%' .$q. '%')
+        ->join('tiendas', 'tiendas.id_tienda', '=', 'tickets.id_tienda')
+        ->orWhere('tiendas.clave', 'LIKE', '%'. $q .'%')
+        ->orWhere("apellido_paterno", 'LIKE' , '%'.$q.'%')
+        ->orWhere("apellido_materno", 'LIKE' , '%'.$q.'%')
+        ->orWhere("no_ticket", 'LIKE' , '%'.$q.'%')
+        ->orWhere("telefono", 'LIKE' , '%'.$q.'%')
+        ->orWhere("tickets.fecha", 'LIKE' , ''.$q.'%')
+        ->select('tickets.id_ticket', 'tickets.nombre', 'tickets.apellido_paterno', 'tickets.apellido_materno', 'tickets.fecha', 'tiendas.clave', 'tickets.no_ticket')
         ->get();
         
         return View::make('tickets.search', compact('t', 'q'));
