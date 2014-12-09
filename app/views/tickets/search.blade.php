@@ -1,7 +1,7 @@
 @extends ('tickets.common')
 @section('titulo')Buscando "{{$q}}" @stop
 @section('content')
-<div class="panel panel-default" style="width: 70%;margin:auto;">
+<div class="panel panel-default" style="width: 85%;margin:auto;">
 <div class="panel-heading">Resultado de la busqueda <strong>"{{$q}}"</strong></div>
 <table class="table">
 <thead>
