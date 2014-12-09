@@ -212,7 +212,7 @@ class TicketsController extends \BaseController
         ->orWhere("no_ticket", 'LIKE' , '%'.$q.'%')
         ->orWhere("telefono", 'LIKE' , '%'.$q.'%')
         ->orWhere("tickets.fecha", 'LIKE' , ''.$q.'%')
-        ->select('tickets.id_ticket', 'tickets.nombre', 'tickets.apellido_paterno', 'tickets.apellido_materno', 'tickets.fecha', 'tiendas.clave', 'tickets.no_ticket')
+        ->select('tickets.id_ticket', 'tickets.nombre', 'tickets.apellido_paterno', 'tickets.apellido_materno', 'tickets.fecha', 'tiendas.clave', 'tickets.no_ticket', 'tickets.id_tienda')
         ->get();
         
         return View::make('tickets.search', compact('t', 'q'));

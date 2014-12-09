@@ -18,7 +18,7 @@
     <tr>
         <td>{{$value['id_ticket']}}</td>
         <td>{{$value['no_ticket']}}</td>
-        <td>{{$value['clave']}}</td>
+        <td>{{link_to('sistema/tienda/ver/'.$value['id_tienda'], $value['clave'])}}</td>
         <td>{{$value['fecha']}}</td>
         <td>{{$value['nombre']." ".$value['apellido_paterno']." ".$value['apellido_materno']}}</td>
         <td><a href="{{URL::to('/sistema/'.$value->id_ticket. '/edit')}}" class="btn btn-info btn-lg active btn-sm" role="button">Editar</a>
