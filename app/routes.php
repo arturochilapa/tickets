@@ -12,11 +12,18 @@
 */
 
 Route::get('/', function (){
-    return Redirect::to('/sistema/');
+    return Redirect::to('login');
 });
-Route::resource('/sistema', 'TicketsController');
-Route::get('/sistema/tienda/ver/{id}', 'TicketsController@tienda');
-#Route::resource('/{id}/edit', 'TicketsController@edit');
-Route::resource('sistema/winners', 'TicketsController@winners');
-Route::post('sistema/search', 'TicketsController@searchTicket');
-Route::get('/export/{id}', 'TicketsController@excel');
+
+Route::resource('login', 'UsuariosController@home');
+Route::resource('valid', 'UsuariosController@valid');
+
+Route::group(array('before' => 'auth'), function()
+{
+	Route::resource('/sistema', 'TicketsController');
+	Route::get('/sistema/tienda/ver/{id}', 'TicketsController@tienda');
+	#Route::resource('/{id}/edit', 'TicketsController@edit');
+	Route::resource('sistema/winners', 'TicketsController@winners');
+	Route::post('sistema/search', 'TicketsController@searchTicket');
+	Route::get('/export/{id}', 'TicketsController@excel');
+});

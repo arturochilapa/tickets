@@ -68,6 +68,7 @@ class TicketsController extends \BaseController
             $ticket->telefono = Input::get('telefono');
             $ticket->no_ticket = Input::get('ticket');
             $ticket->mail = Input::get('mail');
+            $ticket->admin_user = Auth::id();
             $ticket->save();
             Session::flash('message', 'Ticket Creado Correctamente.');
             Session::flash('id_tienda', Input::get('tienda'));
@@ -253,7 +254,7 @@ Where tiendas.id_tienda = 98
         */
         $foo = '';
         $data = Tickets::where('tiendas.id_tienda', '=', $id)
-        ->select(DB::raw('(@cnt := @cnt + 1) AS Number'), 'tiendas.clave', DB::raw('(
+        ->select(DB::raw('(tickets.id_ticket) AS Number'), 'tiendas.clave', DB::raw('(
 		SELECT count(*) AS t
 		FROM tickets AS temp
 		WHERE 
@@ -268,7 +269,7 @@ Where tiendas.id_tienda = 98
         ->get();
 
         
-        Excel::create('Filename', function($excel) use($data) {
+        Excel::create('Reporte', function($excel) use($data) {
         
             $excel->sheet('Sheetname', function($sheet) use($data) {
         
