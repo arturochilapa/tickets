@@ -16,7 +16,7 @@ Route::get('/', function (){
 });
 
 Route::get('/pass', function (){
-    echo Hash::make('secret');
+    echo Hash::make('faytickets');
 });
 
 Route::resource('login', 'UsuariosController@home');
