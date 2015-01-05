@@ -15,6 +15,10 @@ Route::get('/', function (){
     return Redirect::to('login');
 });
 
+Route::get('/pass', function (){
+    echo Hash::make('secret');
+});
+
 Route::resource('login', 'UsuariosController@home');
 Route::resource('valid', 'UsuariosController@valid');
 
