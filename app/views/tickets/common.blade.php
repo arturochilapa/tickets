@@ -46,7 +46,9 @@
               <ul class="nav navbar-nav">
                 <li {{(Request::is('/') ? 'class="active"' : '')}}><a href="/sistema">Inicio</a></li>
                 <li {{(Request::is('create') ? 'class="active"' : '')}}><a href="{{URL::to('/sistema/create')}}">Nuevo Ticket</a></li>
-                
+                @if(Auth::check())
+                <li>{{link_to('salir', 'Salir')}}</li>
+                @endif
               </ul>
               <form class="navbar-form navbar-left" role="search" method="post" action="/sistema/search">
                 <div class="form-group">

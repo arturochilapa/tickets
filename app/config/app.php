@@ -122,6 +122,7 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
         'Maatwebsite\Excel\ExcelServiceProvider',
+        'Thujohn\Pdf\PdfServiceProvider',
 
 	),
 
@@ -189,7 +190,8 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
-        'Excel' => 'Maatwebsite\Excel\Facades\Excel',
+        'Excel' 		  => 'Maatwebsite\Excel\Facades\Excel',
+        'PDF' 			  => 'Thujohn\Pdf\PdfFacade',
 
 	),
 
